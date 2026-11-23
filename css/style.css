@@ -926,3 +926,6 @@ button { font: inherit; color: inherit; }
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; transition-delay: 0s !important; }
   html { scroll-behavior: auto; }
 }
+
+/* obsah hned pod nadpisem podstránky – bez velké mezery */
+.sp-hero + .section { padding-top: clamp(8px, 2vw, 24px); }
