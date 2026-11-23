@@ -913,3 +913,31 @@ button { font: inherit; color: inherit; }
 @media (min-width: 900px) { .jobs--plain { grid-template-columns: 1fr 1fr; column-gap: 56px; } }
 .vila__img { aspect-ratio: 3 / 2; max-width: 640px; width: 100%; }
 .vila__img a { display: block; height: 100%; cursor: zoom-in; }
+
+/* podrobné texty na podstránkách služeb */
+.sp-detail { padding-top: 0; }
+.sp-detail__grid { display: grid; gap: 40px; }
+.sp-detail__item { display: grid; gap: 14px; align-content: start; padding-top: 26px; border-top: 1px solid var(--line); }
+.sp-detail__h { font-family: var(--serif); font-weight: 400; font-size: clamp(1.5rem, 2.6vw, 2.1rem); line-height: 1.12; }
+.sp-detail__item p { color: var(--ink-soft); max-width: 62ch; }
+.sp-detail__list { margin: 4px 0 0; padding-left: 1.2em; display: grid; gap: 8px; color: var(--ink-soft); max-width: 62ch; }
+.sp-detail__list li::marker { color: var(--oak); }
+@media (min-width: 900px) { .sp-detail__grid { grid-template-columns: 1fr 1fr; column-gap: 64px; } }
+
+/* rozcestník na souhrnných stránkách služeb */
+.subs { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--line); }
+.subs__row { display: grid; grid-template-columns: 88px minmax(0, 1fr); gap: 16px; align-items: center; padding: 18px 0; border-bottom: 1px solid var(--line); position: relative; }
+.subs__thumb { width: 88px; height: 72px; object-fit: cover; background: var(--paper-2); transition: transform .6s var(--ease); }
+.subs__name { font-family: var(--serif); font-weight: 400; font-size: clamp(1.3rem, 2.2vw, 1.75rem); line-height: 1.12; transition: color .4s; }
+.subs__name a { color: inherit; text-decoration: none; }
+.subs__name a::after { content: ""; position: absolute; inset: 0; }
+.subs__row:focus-within { outline: 2px solid var(--oak); outline-offset: 2px; }
+.subs__desc { color: var(--ink-soft); font-size: 15px; line-height: 1.45; margin-top: 4px; }
+.subs__row:hover .subs__name { color: var(--oak-text); }
+.subs__row:hover .subs__thumb { transform: scale(1.04); }
+@media (min-width: 900px) {
+  .subs { grid-template-columns: 1fr 1fr; column-gap: 56px; border-top: 0; }
+  .subs__row { grid-template-columns: 140px minmax(0, 1fr); gap: 24px; padding: 22px 0; }
+  .subs__row:nth-child(-n+2) { border-top: 1px solid var(--line); }
+  .subs__thumb { width: 140px; height: 105px; }
+}
