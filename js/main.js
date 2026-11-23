@@ -80,7 +80,7 @@
   /* ---------- načítání -> úvod ---------- */
   const start = () => {
     document.body.classList.add('is-loaded');
-    setTimeout(() => { document.body.classList.add('is-ready'); slideshow.start(); }, reduced ? 0 : 550);
+    setTimeout(() => { document.body.classList.add('is-ready'); slideshow.start(); }, reduced || !$('.loader') ? 0 : 550);
   };
 
   /* počet let se načte, až je číslo vidět */
@@ -92,7 +92,8 @@
     }, { threshold: 0.6 });
     yo.observe(yearsEl);
   }
-  if (reduced) start();
+  // podstránky (bez úvodní clony) nečekají na stažení všech fotek
+  if (reduced || !$('.loader')) requestAnimationFrame(() => requestAnimationFrame(start));
   else {
     const minTime = new Promise(r => setTimeout(r, 1000));
     const loaded = new Promise(r => (document.readyState === 'complete' ? r() : window.addEventListener('load', r, { once: true })));
