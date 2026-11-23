@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="cs" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Správa článků – Truhlářství Mareček</title>
+  <meta name="description" content="Správa článků (ukázka).">
+  <meta name="robots" content="noindex">
+  <meta property="og:title" content="Správa článků – Truhlářství Mareček">
+  <meta property="og:locale" content="cs_CZ">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=12">
+</head>
+<body class="subpage admin-page">
+  <a class="skip" href="#obsah">Přeskočit na obsah</a>
+
+  <header class="nav" data-nav>
+    <div class="nav__inner wrap">
+      <a href="index.html" class="brand" aria-label="Truhlářství Mareček – úvodní stránka">
+        <span class="brand__mark" aria-hidden="true">M</span>
+        <span class="brand__text">Truhlářství Mareček<small>Brno-Řečkovice</small></span>
+      </a>
+      <nav class="nav__links" aria-label="Hlavní navigace">
+        <a href="index.html#sluzby">Co vyrábíme</a>
+        <a href="index.html#realizace">Realizace</a>
+        <a href="kdo-jsme.html">Kdo jsme</a>
+        <a href="clanky.html">Články</a>
+        <a href="kariera.html">Kariéra</a>
+      </nav>
+      <div class="nav__btns">
+        <a href="kontakt.html" class="btn btn--small btn--ghost nav__contact">Kontakt</a>
+        <a href="kontakt.html#poptavka" class="btn btn--small nav__cta">Poptat zakázku</a>
+      </div>
+      <button class="nav__toggle" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="menu" data-menu-toggle>
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="menu" id="menu" data-menu aria-hidden="true">
+    <nav class="menu__links" aria-label="Mobilní navigace">
+      <a href="index.html"><i>01</i>Úvod</a>
+      <a href="index.html#sluzby"><i>02</i>Co vyrábíme</a>
+      <a href="index.html#realizace"><i>03</i>Realizace</a>
+      <a href="kdo-jsme.html"><i>04</i>Kdo jsme</a>
+      <a href="clanky.html"><i>05</i>Články</a>
+      <a href="kariera.html"><i>06</i>Kariéra</a>
+      <a href="kontakt.html"><i>07</i>Kontakt</a>
+    </nav>
+    <div class="menu__foot">
+      <a href="tel:+420777691154">+420 777 691 154</a>
+      <a href="mailto:jiri@truhlarstvi-marecek.cz">jiri@truhlarstvi-marecek.cz</a>
+    </div>
+  </div>
+
+  <main id="obsah">
+    <section class="admin">
+      <div class="wrap">
+        <div class="admin__notice" role="note">
+          <strong>Ukázková verze bez přihlášení.</strong>
+          Články, které tu přidáte, se uloží jen do tohoto prohlížeče a uvidíte je na stránce Články. Ostatní návštěvníci je neuvidí. V&nbsp;ostré verzi bude správa za přihlášením a články se uloží přímo na web.
+        </div>
+        <div class="admin__head">
+          <h1 class="h2">Správa článků</h1>
+          <button class="btn btn--small" type="button" data-new>+ Nový článek</button>
+        </div>
+
+        <div class="admin__grid">
+          <aside class="admin__list" aria-label="Seznam článků">
+            <h2 class="admin__h">Vaše články</h2>
+            <ul data-local-list></ul>
+            <h2 class="admin__h">Články na webu</h2>
+            <ul data-web-list></ul>
+            <button class="link-u admin__export" type="button" data-export>Stáhnout zálohu (JSON)</button>
+          </aside>
+
+          <form class="admin__form" data-editor novalidate>
+            <h2 class="admin__h" data-editor-title>Nový článek</h2>
+            <label class="af">
+              <span>Název článku</span>
+              <input type="text" name="title" required maxlength="140" placeholder="Např. Jak vybrat kuchyň na míru">
+            </label>
+            <div class="af-row">
+              <label class="af">
+                <span>Datum</span>
+                <input type="date" name="date" required>
+              </label>
+              <label class="af">
+                <span>Adresa článku</span>
+                <input type="text" name="slug" placeholder="vytvoří se z názvu" pattern="[a-z0-9-]+">
+              </label>
+            </div>
+            <label class="af">
+              <span>Krátký úvod (zobrazí se v přehledu)</span>
+              <textarea name="perex" rows="3" maxlength="300"></textarea>
+            </label>
+            <div class="af">
+              <span>Titulní fotka</span>
+              <div class="af-photo">
+                <img data-photo-preview alt="" hidden>
+                <label class="btn btn--small btn--ghost-dark af-photo__btn">Vybrat fotku<input type="file" accept="image/*" data-photo hidden></label>
+                <button class="link-u" type="button" data-photo-remove hidden>Odebrat fotku</button>
+              </div>
+            </div>
+            <div class="af">
+              <span>Text článku</span>
+              <div class="af-toolbar" role="toolbar" aria-label="Formátování textu">
+                <button type="button" data-fmt="h">Nadpis</button>
+                <button type="button" data-fmt="b"><strong>Tučně</strong></button>
+                <button type="button" data-fmt="ul">Odrážky</button>
+                <button type="button" data-fmt="a">Odkaz</button>
+              </div>
+              <textarea name="body" rows="14" data-body placeholder="Odstavce oddělte prázdným řádkem."></textarea>
+              <p class="af-help">Nový odstavec = prázdný řádek. Nadpis začněte <code>## </code>, odrážku <code>- </code>, tučné písmo <code>**takto**</code>, odkaz <code>[text](https://…)</code>.</p>
+            </div>
+            <div class="af-actions">
+              <button class="btn" type="submit" data-publish>Zveřejnit <span class="btn__arrow" aria-hidden="true">→</span></button>
+              <button class="btn btn--ghost-dark" type="button" data-draft>Uložit koncept</button>
+              <a class="link-u" href="#" data-view hidden>Zobrazit článek</a>
+              <button class="link-u af-delete" type="button" data-delete hidden>Smazat</button>
+            </div>
+            <p class="form__status admin__status" data-admin-status role="status"></p>
+          </form>
+
+          <section class="admin__preview" aria-label="Náhled článku">
+            <h2 class="admin__h">Náhled</h2>
+            <div class="admin__preview-box">
+              <img data-pv-img alt="" hidden>
+              <h3 data-pv-title>Název článku</h3>
+              <p class="admin__pv-perex" data-pv-perex></p>
+              <div class="prose" data-pv-body></div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer__grid">
+        <div>
+          <strong>Truhlářství Mareček</strong>
+          <p>Jiří Mareček<br>IČ: 74206788<br>DIČ: CZ6909253956, plátce DPH</p>
+        </div>
+        <div>
+          <strong>Dílna a sídlo</strong>
+          <p>Palackého třída 1771/178<br>612 00 Brno-Řečkovice</p>
+          <p>Sídlo: Ostružinová 500/9<br>621 00 Brno-Medlánky</p>
+        </div>
+        <div>
+          <strong>Kontakt</strong>
+          <p><a href="tel:+420777691154">+420 777 691 154</a><br><a href="mailto:jiri@truhlarstvi-marecek.cz">jiri@truhlarstvi-marecek.cz</a><br><a href="kontakt.html">Všechny kontakty</a></p>
+        </div>
+        <div>
+          <strong>Další odkazy</strong>
+          <p class="hiring"><span class="hiring__dot" aria-hidden="true"></span><a href="kariera.html">Práce v dílně</a></p>
+          <p><a href="kdo-jsme.html">Kdo jsme</a><br><a href="index.html#oceneni">Ocenění</a><br><a href="clanky.html">Články</a><br><a href="sprava-clanku.html">Správa článků</a></p>
+          <p><a href="https://www.facebook.com/TruhlarstviMarecek/" target="_blank" rel="noopener">Facebook</a><br><a href="https://www.instagram.com/p/BjkGTInlPt-/" target="_blank" rel="noopener">Instagram</a></p>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span data-year>2026</span> Truhlářství Mareček Brno</span>
+        <span>Tvorba webu <a href="https://skocdal.cz" target="_blank" rel="noopener">Skočdal</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="lightbox" data-lightbox role="dialog" aria-modal="true" aria-label="Zvětšená fotografie" aria-hidden="true">
+    <button class="lightbox__close" type="button" data-lb-close>Zavřít ✕</button>
+    <button class="lightbox__nav lightbox__prev" type="button" data-lb-prev aria-label="Předchozí fotografie">←</button>
+    <figure>
+      <img alt="">
+      <figcaption></figcaption>
+    </figure>
+    <button class="lightbox__nav lightbox__next" type="button" data-lb-next aria-label="Další fotografie">→</button>
+  </div>
+
+  <script src="js/main.js?v=12"></script>
+  <script src="js/clanky.js?v=12"></script>
+  <script src="js/sprava.js?v=12"></script>
+</body>
+</html>
