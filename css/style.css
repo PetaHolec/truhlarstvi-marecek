@@ -263,15 +263,12 @@ button { font: inherit; color: inherit; }
   line-height: .92; letter-spacing: -0.035em;
 }
 .hero__title .line { display: block; overflow: hidden; padding-bottom: .08em; }
-.hero__title .line > span { display: inline-block; transform: translateY(110%); transition: transform 1.2s var(--ease); }
-.is-ready .hero__title .line > span { transform: translateY(0); }
-.is-ready .hero__title .line:nth-child(2) > span { transition-delay: .1s; }
+.hero__title .line > span { display: inline-block; }
 .hero__sub { font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.5rem); line-height: 1.15; margin-top: 4px; }
 .hero__lead { max-width: 48ch; font-size: 18px; color: rgba(242,237,228,.85); }
 .hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 28px; margin-top: 8px; }
 
-[data-hero-fade] { opacity: 0; transform: translateY(18px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
-.is-ready [data-hero-fade] { opacity: 1; transform: none; transition-delay: .45s; }
+/* úvod je vidět hned – nic se nečeká */
 
 /* úvod končí linkou, která zároveň ukazuje, kolikátá fotka běží */
 .hero__controls { margin-top: clamp(32px, 5vw, 60px); }
@@ -690,13 +687,10 @@ button { font: inherit; color: inherit; }
   line-height: .98; letter-spacing: -0.03em; text-wrap: balance;
 }
 .sp-hero__title .line { display: block; overflow: hidden; padding-bottom: .08em; }
-.sp-hero__title .line > span { display: inline-block; transform: translateY(110%); transition: transform 1.2s var(--ease); }
-.is-ready .sp-hero__title .line > span { transform: none; }
+.sp-hero__title .line > span { display: inline-block; }
 .sp-hero__lead { font-size: 19px; color: var(--ink-soft); max-width: 46ch; }
-.sp-hero__img { margin: 0; overflow: hidden; background: var(--paper-2); aspect-ratio: 4 / 3; clip-path: inset(100% 0 0 0); transition: clip-path 1.4s var(--ease-io) .15s; }
-.sp-hero__img img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.15); transition: transform 2s var(--ease); }
-.is-ready .sp-hero__img { clip-path: inset(0 0 0 0); }
-.is-ready .sp-hero__img img { transform: none; }
+.sp-hero__img { margin: 0; overflow: hidden; background: var(--paper-2); aspect-ratio: 4 / 3; }
+.sp-hero__img img { width: 100%; height: 100%; object-fit: cover; }
 @media (min-width: 900px) {
   .sp-hero { padding-top: 140px; }
   .sp-hero__grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: 64px; }

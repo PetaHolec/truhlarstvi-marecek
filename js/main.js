@@ -92,13 +92,8 @@
     }, { threshold: 0.6 });
     yo.observe(yearsEl);
   }
-  // podstránky (bez úvodní clony) nečekají na stažení všech fotek
-  if (reduced || !$('.loader')) requestAnimationFrame(() => requestAnimationFrame(start));
-  else {
-    const minTime = new Promise(r => setTimeout(r, 1000));
-    const loaded = new Promise(r => (document.readyState === 'complete' ? r() : window.addEventListener('load', r, { once: true })));
-    Promise.race([Promise.all([minTime, loaded]), new Promise(r => setTimeout(r, 1900))]).then(start);
-  }
+  // úvod se ukáže hned, na stažení fotek se nečeká
+  start();
 
   function countUp(el, to, dur, delay) {
     el.textContent = '0';
