@@ -158,42 +158,6 @@
   /* ---------- paralaxa ---------- */
   const para = $$('[data-parallax]');
 
-  /* ---------- vodorovná galerie ---------- */
-  const hs = $('[data-hscroll]');
-  const track = $('[data-htrack]');
-  const prog = $('[data-hprogress]');
-  const pinMQ = window.matchMedia('(min-width: 900px) and (hover: hover)');
-  let pinned = false, maxX = 0;
-
-  const setupPin = () => {
-    if (!hs || !track) return;
-    pinned = pinMQ.matches && !reduced;
-    hs.classList.toggle('is-pinned', pinned);
-    if (!pinned) {
-      hs.style.height = '';
-      track.style.transform = '';
-      return;
-    }
-    maxX = Math.max(0, track.scrollWidth - window.innerWidth);
-    hs.style.height = `${window.innerHeight + maxX}px`;
-  };
-
-  if (track) track.addEventListener('scroll', () => {
-    if (pinned) return;
-    const m = track.scrollWidth - track.clientWidth;
-    prog.style.transform = `scaleX(${m > 0 ? track.scrollLeft / m : 0})`;
-  }, { passive: true });
-
-  /* při procházení galerie klávesnicí posuneme stránku k fotce */
-  if (track) track.addEventListener('focusin', e => {
-    if (!pinned) return;
-    const item = e.target.closest('.g-item, .g-end');
-    if (!item) return;
-    const idx = [...track.children].indexOf(item);
-    const p = idx / (track.children.length - 1);
-    window.scrollTo({ top: hs.offsetTop + p * (hs.offsetHeight - window.innerHeight), behavior: 'auto' });
-  });
-
   /* ---------- průběh zakázky – linka ---------- */
   const steps = $('[data-steps]');
   const stepItems = steps ? $$('li', steps) : [];
@@ -214,13 +178,6 @@
       });
     }
 
-    if (pinned) {
-      const r = hs.getBoundingClientRect();
-      const p = Math.min(Math.max(-r.top / (hs.offsetHeight - vh), 0), 1);
-      track.style.transform = `translate3d(${-p * maxX}px,0,0)`;
-      prog.style.transform = `scaleX(${p})`;
-    }
-
     if (steps) {
       const r = steps.getBoundingClientRect();
       const p = Math.min(Math.max((vh * 0.6 - r.top) / r.height, 0), 1);
@@ -230,38 +187,8 @@
   };
   const req = () => { if (!ticking) { ticking = true; requestAnimationFrame(frame); } };
   window.addEventListener('scroll', req, { passive: true });
-  window.addEventListener('resize', () => { setupPin(); req(); });
-  window.addEventListener('load', () => { setupPin(); req(); });
-  setupPin();
+  window.addEventListener('resize', req);
   frame();
-
-  /* ---------- služby: fotka v rámečku vpravo ---------- */
-  const svcFrame = $('[data-svc-frame]');
-  if (svcFrame) {
-    const imgs = $$('.svc-frame__box img', svcFrame);
-    const capNo = $('[data-svc-no]', svcFrame);
-    const capText = $('[data-svc-cap]', svcFrame);
-    const rows = $$('.svc__row');
-    let front = 0, current = rows[0];
-    rows.forEach(r => { const i = new Image(); i.src = r.dataset.img; }); // přednačtení
-    const showRow = row => {
-      if (row === current) return;
-      current = row;
-      rows.forEach(r => r.classList.toggle('is-current', r === row));
-      const next = imgs[1 - front];
-      next.src = row.dataset.img;
-      next.alt = '';
-      const swap = () => { next.classList.add('is-on'); imgs[front].classList.remove('is-on'); front = 1 - front; };
-      next.complete ? swap() : next.addEventListener('load', swap, { once: true });
-      capNo.textContent = $('.svc__no', row).textContent;
-      capText.textContent = $('.svc__name', row).textContent;
-    };
-    rows[0].classList.add('is-current');
-    rows.forEach(row => {
-      row.addEventListener('mouseenter', () => showRow(row));
-      row.addEventListener('focusin', () => showRow(row));
-    });
-  }
 
   /* ---------- zvětšení fotografie ---------- */
   const lb = $('[data-lightbox]');
